@@ -1,53 +1,24 @@
 
 /**
- * 暂时使用 待优化TODO
+ * Toast弹出框 暂时使用 待优化TODO
  */ 
-function showAlert(type, text, TIME = 3000) {
+// function showAlert(type, text, TIME = 3000) {
 
-	const $triggerEl = document.getElementById(`alert_${type}`);
-	$triggerEl.style.display = "flex";
+// 	const $triggerEl = document.getElementById(`alert_${type}`);
+// 	$triggerEl.style.display = "flex";
 
-	$triggerEl.children[2].textContent = text
+// 	$triggerEl.children[2].textContent = text
 
-	let timer = setTimeout(() => {
-		$triggerEl.style.display = "none";
-		clearTimeout(timer);
-	}, TIME)
-}
-
-//这里就是两个参数传入一个颜色一个提示语
-// function toast(color, text){
-//     //创建一个div之后把参数上的提示语放上去再加入颜色
-// 	// const body = document.getElementsByTagName('body')
-// 	const toast = document.createElement("div")
-//     toast.className = 'toast_area'
-// 	toast.innerHTML = `<div
-// 				class="flex p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
-// 				role="alert">
-// 				<svg aria-hidden="true" class="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor"
-// 					viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-// 					<path fill-rule="evenodd"
-// 						d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-// 						clip-rule="evenodd"></path>
-// 				</svg>
-// 				<span class="sr-only">Info</span>
-// 				<div>
-// 					${text}
-// 				</div>
-// 			</div>`
-// 	document.body.appendChild(toast)
-//     //定义一个显示时间多少秒之后消失
-// 	// setTimeout(function(){
-// 	// 	document.body.removeChild(toast)
-// 	// }, 3000)
+// 	let timer = setTimeout(() => {
+// 		$triggerEl.style.display = "none";
+// 		clearTimeout(timer);
+// 	}, TIME)
 // }
-
 
 let voiceFlag = false; // 是否进行语音输入的标志
 
 function useVoiceFuc() {
 	showAlert("info", "你好")
-	// toast('info', "你好")
 	voiceFlag = !voiceFlag;
 }
 
@@ -59,8 +30,6 @@ function blobToObject(blob) {
 
 		try {
 			const dataAsString = reader.result;
-
-
 			const dataAsObject = JSON.parse(dataAsString); // 传入参数转义Object
 			const messagesDiv = document.querySelector('#messages');
 			const messElementById = document.getElementById("messages");
@@ -80,7 +49,7 @@ function blobToObject(blob) {
         						<span>${dataAsObject.user}</span>
         						<span>${dataAsObject.date}</span>
         					</div>
-        					<div class="chat-bubble-content">
+        					<div class="chat-bubble-content flex justify-center items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg px-5 py-2.5">
         						<p>${dataAsObject.content}</p>
         					</div>
         				</div>`
@@ -95,13 +64,10 @@ function blobToObject(blob) {
         					  </div>
         					</div>`;
 			}
-			
 			messElementById.scrollTop = messElementById.scrollHeight; 
 		} catch (e) {
 			//TODO handle the exception
 		}
-
-
 	};
 
 	reader.readAsText(blob);
@@ -113,7 +79,7 @@ const socket = new WebSocket('ws://localhost:8080');
 // const socket = new WebSocket('wss://dhc.ink/ws');
 
 // 心跳检测间隔时间（毫秒）
-const HEARTBEAT_INTERVAL = 5000;
+const HEARTBEAT_INTERVAL = 10000;
 
 // 最近一次收到消息的时间
 let lastMessageTime = Date.now();
@@ -148,9 +114,15 @@ socket.addEventListener('close', event => {
 const messageForm = document.querySelector('#message-form');
 const messageInput = document.querySelector('#message-input');
 
+console.log('messageFormmessageForm', messageForm)
+
 messageForm.addEventListener('submit', event => {
+	
 	event.preventDefault();
 	const message = messageInput.value;
+	
+	console.log('message_message', message)
+	
 
 	if (message) {
 		socket.send(message);
@@ -158,6 +130,15 @@ messageForm.addEventListener('submit', event => {
 	} else {
 
 	}
-
-
 });
+
+function onSubmitChat (){
+	const message = messageInput.value;
+	
+	if (message) {
+		socket.send(message);
+		messageInput.value = '';
+	} else {
+	
+	}
+}
