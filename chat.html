@@ -42,9 +42,9 @@
 			</div>
 			<!-- input area -->
 			<form id="message-form" class="input_area">
-				<button type="button" style="margin-right: 10px;"
+				<button id="example_click" type="button" style="margin-right: 10px;"
 					class="py-2.5 px-5 mr-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-					onclick="useVoiceFuc()"><img src="./assets/voice_close.svg" style="width: 2.2em;" ></button>
+					 ><img src="./assets/voice_close.svg" style="width: 2.2em;" ></button>
 				<input type="text" id="message-input" placeholder="请输入..." class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
 				<button type="submit" style="margin-left: 10px;"
 					class="flex w-24 justify-center items-center text-white bg-gradient-to-r from-green-400 via-green-500 to-green-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 shadow-lg shadow-green-500/50 dark:shadow-lg dark:shadow-green-800/80 font-medium rounded-lg text-sm px-5 py-2.5"><img
@@ -66,12 +66,32 @@
 			</div>
 		</div>
 		
-		<!-- <include src="./src/components/alert.html" /> -->
+		<!-- modal -->
+		<link rel="import" href="./src/components/modal.html" is="ui-import">
+
+		<!-- toast -->
+		<link rel="import" href="./src/components/alert.html" is="ui-import">
+		
 		<!-- ui -->
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js" ></script>
 		<!-- main js -->
 		<script src="./src/index.js"></script>
 		<!-- include js -->
-		<!-- <script src="src/include.js" type="module"></script> -->
+		<script src="./src/lib/importHtml/html-import.js"></script>
+		
+<!-- 		<script src="./src/module.js" type="module"></script>
+ -->		
+		<script async type="module">
+			import {
+				modal
+			} from "./src/components/modal.js"
+			
+			
+			document.getElementById("example_click").onclick = () => {
+				modal.show();
+			};
+			
+		</script>
+		
 	</body>
 </html>

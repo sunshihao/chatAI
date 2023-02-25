@@ -1,3 +1,4 @@
+/** page  joint */
 let includes = document.getElementsByTagName('include');
 for (var i = 0; i < includes.length; i++) {
 	let include = includes[i];

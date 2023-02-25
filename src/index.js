@@ -1,19 +1,21 @@
+/** main page */
+
 
 /**
  * Toast弹出框 暂时使用 待优化TODO
  */ 
-// function showAlert(type, text, TIME = 3000) {
+function showAlert(type, text, TIME = 3000) {
 
-// 	const $triggerEl = document.getElementById(`alert_${type}`);
-// 	$triggerEl.style.display = "flex";
+	const $triggerEl = document.getElementById(`alert_${type}`);
+	$triggerEl.style.display = "flex";
 
-// 	$triggerEl.children[2].textContent = text
+	$triggerEl.children[2].textContent = text
 
-// 	let timer = setTimeout(() => {
-// 		$triggerEl.style.display = "none";
-// 		clearTimeout(timer);
-// 	}, TIME)
-// }
+	let timer = setTimeout(() => {
+		$triggerEl.style.display = "none";
+		clearTimeout(timer);
+	}, TIME)
+}
 
 let voiceFlag = false; // 是否进行语音输入的标志
 
